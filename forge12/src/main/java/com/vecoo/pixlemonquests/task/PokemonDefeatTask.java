@@ -27,8 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PokemonDefeatTask extends Task {
     public String pokemon = "Any";
     public int level = 0;
-    public String type1 = "Any";
-    public String type2 = "Any";
+    public String type = "Any";
     public String boss = "None";
     public String gender = "Any";
     public int generation = 0;
@@ -58,8 +57,7 @@ public class PokemonDefeatTask extends Task {
         super.writeData(nbt);
         nbt.setString("pokemon", this.pokemon);
         nbt.setInteger("level", this.level);
-        nbt.setString("type1", this.type1);
-        nbt.setString("type2", this.type2);
+        nbt.setString("type", this.type);
         nbt.setString("boss", this.boss);
         nbt.setString("gender", this.gender);
         nbt.setInteger("generation", this.generation);
@@ -76,8 +74,7 @@ public class PokemonDefeatTask extends Task {
         super.readData(nbt);
         this.pokemon = nbt.getString("pokemon");
         this.level = nbt.getInteger("level");
-        this.type1 = nbt.getString("type1");
-        this.type2 = nbt.getString("type2");
+        this.type = nbt.getString("type");
         this.boss = nbt.getString("boss");
         this.gender = nbt.getString("gender");
         this.generation = nbt.getInteger("generation");
@@ -94,8 +91,7 @@ public class PokemonDefeatTask extends Task {
         super.writeNetData(data);
         data.writeString(this.pokemon);
         data.writeInt(this.level);
-        data.writeString(this.type1);
-        data.writeString(this.type2);
+        data.writeString(this.type);
         data.writeString(this.boss);
         data.writeString(this.gender);
         data.writeInt(this.generation);
@@ -112,8 +108,7 @@ public class PokemonDefeatTask extends Task {
         super.readNetData(data);
         this.pokemon = data.readString();
         this.level = data.readInt();
-        this.type1 = data.readString();
-        this.type2 = data.readString();
+        this.type = data.readString();
         this.boss = data.readString();
         this.gender = data.readString();
         this.generation = data.readInt();
@@ -171,8 +166,7 @@ public class PokemonDefeatTask extends Task {
         super.getConfig(config);
         config.addString("pokemon", () -> this.pokemon, v -> this.pokemon = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.pokemon"));
         config.addInt("level", () -> this.level, v -> this.level = v, 0, 0, Integer.MAX_VALUE).setDisplayName(new TextComponentTranslation("pixelmonquests.level"));
-        config.addString("type1", () -> this.type1, v -> this.type1 = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.type1"));
-        config.addString("type2", () -> this.type2, v -> this.type2 = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.type2"));
+        config.addString("type", () -> this.type, v -> this.type = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.type"));
         config.addString("boss", () -> this.boss, v -> this.boss = v, "None").setDisplayName(new TextComponentTranslation("pixelmonquests.boss"));
         config.addString("gender", () -> this.gender, v -> this.gender = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.gender"));
         config.addInt("generation", () -> this.generation, v -> this.generation = v, 0, 0, Integer.MAX_VALUE).setDisplayName(new TextComponentTranslation("pixelmonquests.generation"));
@@ -211,12 +205,8 @@ public class PokemonDefeatTask extends Task {
                 return;
             }
 
-            if (!task.type1.equalsIgnoreCase(pokemonStats.getType1().getName()) && !task.type1.equalsIgnoreCase("Any")) {
-                return;
-            }
-
             if (pokemonStats.getType2() != null) {
-                if (!task.type2.equalsIgnoreCase(pokemonStats.getType2().getName()) && !task.type2.equalsIgnoreCase("Any")) {
+                if (!task.type.equalsIgnoreCase(pokemonStats.getType1().getName()) && !task.type.equalsIgnoreCase(pokemonStats.getType2().getName()) && !task.type.equalsIgnoreCase("Any")) {
                     return;
                 }
             }

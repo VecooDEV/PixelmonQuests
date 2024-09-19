@@ -2,7 +2,7 @@
   {
     "modid": "pixelmonquests",
     "name": "PixelmonQuests",
-    "description": "Sidemode for Pixelmon/FTB Quests, adding various tasks related to Pokemon.",
+    "description": "Sidemode for Pixelmon and FTB Quests. Adds new Pokemon related quests and rewards.",
     "version": "1.0.0",
     "mcversion": "1.12.2",
     "logoFile": "logo.png",
