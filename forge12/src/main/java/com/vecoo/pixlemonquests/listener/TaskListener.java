@@ -6,11 +6,8 @@ import com.feed_the_beast.ftbquests.quest.task.TaskData;
 import com.pixelmonmod.pixelmon.api.events.BeatWildPixelmonEvent;
 import com.pixelmonmod.pixelmon.api.events.CaptureEvent;
 import com.pixelmonmod.pixelmon.api.events.EggHatchEvent;
-import com.pixelmonmod.pixelmon.api.events.battles.AttackEvent;
-import com.pixelmonmod.pixelmon.api.events.battles.BattleEndEvent;
 import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.entities.pixelmon.EntityPixelmon;
-import com.pixelmonmod.pixelmon.enums.battle.EnumBattleEndCause;
 import com.vecoo.pixlemonquests.task.PokemonCatchTask;
 import com.vecoo.pixlemonquests.task.PokemonDefeatTask;
 import com.vecoo.pixlemonquests.task.PokemonEggHatchTask;
@@ -37,7 +34,7 @@ public class TaskListener {
             TaskData taskData = data.getTaskData(task);
 
             if (taskData.progress < task.getMaxProgress() && task.quest.canStartTasks(data)) {
-                ((PokemonCatchTask.Data) taskData).progress(entityPixelmon);
+                ((PokemonCatchTask.Data) taskData).progress(entityPixelmon, event.pokeball.getType());
             }
         }
     }
@@ -59,7 +56,7 @@ public class TaskListener {
         for (PokemonCatchTask task : ServerQuestFile.INSTANCE.collect(PokemonCatchTask.class)) {
             TaskData taskData = data.getTaskData(task);
             if (taskData.progress < task.getMaxProgress() && task.quest.canStartTasks(data)) {
-                ((PokemonCatchTask.Data) taskData).progress(entityPixelmon);
+                ((PokemonCatchTask.Data) taskData).progress(entityPixelmon, event.pokeball.getType());
             }
         }
     }

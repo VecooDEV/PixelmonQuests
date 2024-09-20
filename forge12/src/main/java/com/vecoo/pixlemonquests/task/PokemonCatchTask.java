@@ -16,6 +16,7 @@ import com.pixelmonmod.pixelmon.api.pokemon.PokemonSpec;
 import com.pixelmonmod.pixelmon.entities.pixelmon.EntityPixelmon;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.BaseStats;
 import com.pixelmonmod.pixelmon.enums.EnumSpecies;
+import com.pixelmonmod.pixelmon.enums.EnumType;
 import com.pixelmonmod.pixelmon.enums.items.EnumPokeballs;
 import com.pixelmonmod.pixelmon.items.ItemPixelmonSprite;
 import com.vecoo.pixlemonquests.integration.PixelmonIntegration;
@@ -28,7 +29,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PokemonCatchTask extends Task {
     public String pokemon = "Any";
     public int level = 0;
-    public String type = "Any";
+    public String types = "Any";
     public String nature = "Any";
     public boolean hiddenAbility = false;
     public String gender = "Any";
@@ -63,7 +64,7 @@ public class PokemonCatchTask extends Task {
         super.writeData(nbt);
         nbt.setString("pokemon", this.pokemon);
         nbt.setInteger("level", this.level);
-        nbt.setString("type", this.type);
+        nbt.setString("types", this.types);
         nbt.setString("nature", this.nature);
         nbt.setBoolean("hiddenAbility", this.hiddenAbility);
         nbt.setString("gender", this.gender);
@@ -85,7 +86,7 @@ public class PokemonCatchTask extends Task {
         super.readData(nbt);
         this.pokemon = nbt.getString("pokemon");
         this.level = nbt.getInteger("level");
-        this.type = nbt.getString("type");
+        this.types = nbt.getString("types");
         this.nature = nbt.getString("nature");
         this.hiddenAbility = nbt.getBoolean("hiddenAbility");
         this.gender = nbt.getString("gender");
@@ -107,7 +108,7 @@ public class PokemonCatchTask extends Task {
         super.writeNetData(data);
         data.writeString(this.pokemon);
         data.writeInt(this.level);
-        data.writeString(this.type);
+        data.writeString(this.types);
         data.writeString(this.nature);
         data.writeBoolean(this.hiddenAbility);
         data.writeString(this.gender);
@@ -129,7 +130,7 @@ public class PokemonCatchTask extends Task {
         super.readNetData(data);
         this.pokemon = data.readString();
         this.level = data.readInt();
-        this.type = data.readString();
+        this.types = data.readString();
         this.nature = data.readString();
         this.hiddenAbility = data.readBoolean();
         this.gender = data.readString();
@@ -192,7 +193,7 @@ public class PokemonCatchTask extends Task {
         super.getConfig(config);
         config.addString("pokemon", () -> this.pokemon, v -> this.pokemon = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.pokemon"));
         config.addInt("level", () -> this.level, v -> this.level = v, 0, 0, Integer.MAX_VALUE).setDisplayName(new TextComponentTranslation("pixelmonquests.level"));
-        config.addString("type", () -> this.type, v -> this.type = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.type"));
+        config.addString("types", () -> this.types, v -> this.types = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.types"));
         config.addString("nature", () -> this.nature, v -> this.nature = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.nature"));
         config.addBool("hiddenAbility", () -> this.hiddenAbility, v -> this.hiddenAbility = v, false).setDisplayName(new TextComponentTranslation("pixelmonquests.hiddenAbility"));
         config.addString("gender", () -> this.gender, v -> this.gender = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.gender"));
@@ -219,7 +220,7 @@ public class PokemonCatchTask extends Task {
             super(task, data);
         }
 
-        public void progress(EntityPixelmon entityPixelmon) {
+        public void progress(EntityPixelmon entityPixelmon, EnumPokeballs pokeball) {
             if (this.isComplete()) {
                 return;
             }
@@ -236,10 +237,8 @@ public class PokemonCatchTask extends Task {
                 return;
             }
 
-            if (pokemonStats.getType2() != null) {
-                if (!task.type.equalsIgnoreCase(pokemonStats.getType1().getName()) && !task.type.equalsIgnoreCase(pokemonStats.getType2().getName()) && !task.type.equalsIgnoreCase("Any")) {
-                    return;
-                }
+            if (!pokemonStats.getTypeList().contains(EnumType.parseType(task.types)) && !task.types.equalsIgnoreCase("Any")) {
+                return;
             }
 
             if (!task.nature.equalsIgnoreCase(pokemon.getNature().getName()) && !task.nature.equalsIgnoreCase("Any")) {
@@ -258,10 +257,8 @@ public class PokemonCatchTask extends Task {
                 return;
             }
 
-            if (EnumPokeballs.getPokeballFromString(task.pokeball) != null && !task.pokeball.equalsIgnoreCase("Any")) {
-                if (!task.pokeball.equalsIgnoreCase(EnumPokeballs.getPokeballFromString(task.pokeball).name())) {
-                    return;
-                }
+            if (!task.pokeball.equalsIgnoreCase(pokeball.name()) && !task.pokeball.equalsIgnoreCase("Any")) {
+                return;
             }
 
             if (task.ivs > pokemon.getIVs().getTotal()) {

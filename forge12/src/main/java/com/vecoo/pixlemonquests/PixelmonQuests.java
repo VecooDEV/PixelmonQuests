@@ -11,7 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = PixelmonQuests.MOD_ID, acceptableRemoteVersions = "*", useMetadata = true)
-public class    PixelmonQuests {
+public class PixelmonQuests {
     public static final String MOD_ID = "pixelmonquests";
     private static final Logger LOGGER = LogManager.getLogger("PixelmonQuests");
 
