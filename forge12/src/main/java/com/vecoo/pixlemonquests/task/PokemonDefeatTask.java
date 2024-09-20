@@ -16,6 +16,7 @@ import com.pixelmonmod.pixelmon.api.pokemon.PokemonSpec;
 import com.pixelmonmod.pixelmon.entities.pixelmon.EntityPixelmon;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.BaseStats;
 import com.pixelmonmod.pixelmon.enums.EnumSpecies;
+import com.pixelmonmod.pixelmon.enums.EnumType;
 import com.pixelmonmod.pixelmon.items.ItemPixelmonSprite;
 import com.vecoo.pixlemonquests.integration.PixelmonIntegration;
 import net.minecraft.client.resources.I18n;
@@ -27,7 +28,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class PokemonDefeatTask extends Task {
     public String pokemon = "Any";
     public int level = 0;
-    public String type = "Any";
+    public String types = "Any";
     public String boss = "None";
     public String gender = "Any";
     public int generation = 0;
@@ -57,7 +58,7 @@ public class PokemonDefeatTask extends Task {
         super.writeData(nbt);
         nbt.setString("pokemon", this.pokemon);
         nbt.setInteger("level", this.level);
-        nbt.setString("type", this.type);
+        nbt.setString("types", this.types);
         nbt.setString("boss", this.boss);
         nbt.setString("gender", this.gender);
         nbt.setInteger("generation", this.generation);
@@ -74,7 +75,7 @@ public class PokemonDefeatTask extends Task {
         super.readData(nbt);
         this.pokemon = nbt.getString("pokemon");
         this.level = nbt.getInteger("level");
-        this.type = nbt.getString("type");
+        this.types = nbt.getString("types");
         this.boss = nbt.getString("boss");
         this.gender = nbt.getString("gender");
         this.generation = nbt.getInteger("generation");
@@ -91,7 +92,7 @@ public class PokemonDefeatTask extends Task {
         super.writeNetData(data);
         data.writeString(this.pokemon);
         data.writeInt(this.level);
-        data.writeString(this.type);
+        data.writeString(this.types);
         data.writeString(this.boss);
         data.writeString(this.gender);
         data.writeInt(this.generation);
@@ -108,7 +109,7 @@ public class PokemonDefeatTask extends Task {
         super.readNetData(data);
         this.pokemon = data.readString();
         this.level = data.readInt();
-        this.type = data.readString();
+        this.types = data.readString();
         this.boss = data.readString();
         this.gender = data.readString();
         this.generation = data.readInt();
@@ -166,7 +167,7 @@ public class PokemonDefeatTask extends Task {
         super.getConfig(config);
         config.addString("pokemon", () -> this.pokemon, v -> this.pokemon = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.pokemon"));
         config.addInt("level", () -> this.level, v -> this.level = v, 0, 0, Integer.MAX_VALUE).setDisplayName(new TextComponentTranslation("pixelmonquests.level"));
-        config.addString("type", () -> this.type, v -> this.type = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.type"));
+        config.addString("types", () -> this.types, v -> this.types = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.types"));
         config.addString("boss", () -> this.boss, v -> this.boss = v, "None").setDisplayName(new TextComponentTranslation("pixelmonquests.boss"));
         config.addString("gender", () -> this.gender, v -> this.gender = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.gender"));
         config.addInt("generation", () -> this.generation, v -> this.generation = v, 0, 0, Integer.MAX_VALUE).setDisplayName(new TextComponentTranslation("pixelmonquests.generation"));
@@ -205,10 +206,8 @@ public class PokemonDefeatTask extends Task {
                 return;
             }
 
-            if (pokemonStats.getType2() != null) {
-                if (!task.type.equalsIgnoreCase(pokemonStats.getType1().getName()) && !task.type.equalsIgnoreCase(pokemonStats.getType2().getName()) && !task.type.equalsIgnoreCase("Any")) {
-                    return;
-                }
+            if (!pokemonStats.getTypeList().contains(EnumType.parseType(task.types)) && !task.types.equalsIgnoreCase("Any")) {
+                return;
             }
 
             if (!task.boss.equalsIgnoreCase(entityPixelmon.getBossMode().name()) && !task.boss.equalsIgnoreCase("None")) {
