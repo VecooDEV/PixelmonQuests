@@ -15,9 +15,11 @@ import com.pixelmonmod.pixelmon.api.pokemon.Pokemon;
 import com.pixelmonmod.pixelmon.api.pokemon.PokemonSpec;
 import com.pixelmonmod.pixelmon.entities.pixelmon.EntityPixelmon;
 import com.pixelmonmod.pixelmon.entities.pixelmon.stats.BaseStats;
+import com.pixelmonmod.pixelmon.enums.EnumBossMode;
 import com.pixelmonmod.pixelmon.enums.EnumSpecies;
 import com.pixelmonmod.pixelmon.enums.EnumType;
 import com.pixelmonmod.pixelmon.items.ItemPixelmonSprite;
+import com.vecoo.pixlemonquests.PixelmonQuests;
 import com.vecoo.pixlemonquests.integration.PixelmonIntegration;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.nbt.NBTTagCompound;
@@ -218,7 +220,7 @@ public class PokemonDefeatTask extends Task {
                 return;
             }
 
-            if (task.generation == pokemonSpec.getGeneration() && pokemonSpec.getGeneration() != 0) {
+            if (task.generation != pokemonSpec.getGeneration() && task.generation != 0) {
                 return;
             }
 
@@ -230,15 +232,15 @@ public class PokemonDefeatTask extends Task {
                 return;
             }
 
-            if (task.shiny != pokemon.isShiny()) {
+            if (task.shiny && !pokemon.isShiny()) {
                 return;
             }
 
-            if (task.beast != pokemonSpec.isUltraBeast()) {
+            if (task.beast && !pokemonSpec.isUltraBeast()) {
                 return;
             }
 
-            if (task.legendary != pokemonSpec.isLegendary()) {
+            if (task.legendary && !pokemonSpec.isLegendary()) {
                 return;
             }
 
