@@ -153,7 +153,7 @@ public class PokemonEggHatchTask extends Task {
                 return;
             }
 
-            if (task.ivs > pokemon.getIVs().getTotal()) {
+            if (task.ivs > pokemon.getIVs().getPercentage(pokemon.getIVs().getTotal())) {
                 return;
             }
 
