@@ -15,7 +15,6 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class TaskListener {
-
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public void onCatch(CaptureEvent.SuccessfulCapture event) {
         EntityPixelmon entityPixelmon = event.getPokemon();
@@ -55,6 +54,7 @@ public class TaskListener {
 
         for (PokemonCatchTask task : ServerQuestFile.INSTANCE.collect(PokemonCatchTask.class)) {
             TaskData taskData = data.getTaskData(task);
+
             if (taskData.progress < task.getMaxProgress() && task.quest.canStartTasks(data)) {
                 ((PokemonCatchTask.Data) taskData).progress(entityPixelmon, event.pokeball.getType());
             }
@@ -77,6 +77,7 @@ public class TaskListener {
 
         for (PokemonDefeatTask task : ServerQuestFile.INSTANCE.collect(PokemonDefeatTask.class)) {
             TaskData taskData = data.getTaskData(task);
+
             if (taskData.progress < task.getMaxProgress() && task.quest.canStartTasks(data)) {
                 ((PokemonDefeatTask.Data) taskData).progress(entityPixelmon);
             }
@@ -99,6 +100,7 @@ public class TaskListener {
 
         for (PokemonEggHatchTask task : ServerQuestFile.INSTANCE.collect(PokemonEggHatchTask.class)) {
             TaskData taskData = data.getTaskData(task);
+
             if (taskData.progress < task.getMaxProgress() && task.quest.canStartTasks(data)) {
                 ((PokemonEggHatchTask.Data) taskData).progress(pokemon);
             }

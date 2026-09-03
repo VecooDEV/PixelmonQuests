@@ -1,10 +1,12 @@
 ftbquests.task.pixelmonquests.pokemon_catch=Поимка покемона
 ftbquests.task.pixelmonquests.pokemon_defeat=Устранение покемона
 ftbquests.task.pixelmonquests.pokemon_egg_hatch=Вылупление покемона
+ftbquests.task.pixelmonquests.pokedex=Покедекс
 
 pixelmonquests.pokemon_catch.title=Поймать %dx %s
 pixelmonquests.pokemon_defeat.title=Победить %dx %s
 pixelmonquests.pokemon_egg_hatch.title=Вылупить %dx %s
+pixelmonquests.pokedex.title=Заполнить покедекс на %d%%
 
 pixelmonquests.pokemon=Покемон
 pixelmonquests.pokemon.tooltip=Наименование покемона (на английском).
@@ -42,3 +44,4 @@ pixelmonquests.legendary=Легендарный
 pixelmonquests.legendary.tooltip=Является ли покемон легендарным?
 pixelmonquests.amount=Количество
 pixelmonquests.amount.tooltip=Количество покемонов.
+pixelmonquests.pokedex.percent=Процент покедекса

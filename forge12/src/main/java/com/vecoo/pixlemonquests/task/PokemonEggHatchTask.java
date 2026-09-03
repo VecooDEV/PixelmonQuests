@@ -157,19 +157,19 @@ public class PokemonEggHatchTask extends Task {
                 return;
             }
 
-            if (task.generation == pokemonSpec.getGeneration() && pokemonSpec.getGeneration() != 0) {
+            if (task.generation != 0 && task.generation != pokemonSpec.getGeneration()) {
                 return;
             }
 
-            if (task.shiny != pokemon.isShiny()) {
+            if (task.shiny && !pokemon.isShiny()) {
                 return;
             }
 
-            if (task.beast != pokemonSpec.isUltraBeast()) {
+            if (task.beast && !pokemonSpec.isUltraBeast()) {
                 return;
             }
 
-            if (task.legendary != pokemonSpec.isLegendary()) {
+            if (task.legendary && !pokemonSpec.isLegendary()) {
                 return;
             }
 

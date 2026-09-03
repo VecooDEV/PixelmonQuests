@@ -171,7 +171,7 @@ public class PokemonDefeatTask extends Task {
         config.addString("boss", () -> this.boss, v -> this.boss = v, "None").setDisplayName(new TextComponentTranslation("pixelmonquests.boss"));
         config.addString("gender", () -> this.gender, v -> this.gender = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.gender"));
         config.addInt("generation", () -> this.generation, v -> this.generation = v, 0, 0, Integer.MAX_VALUE).setDisplayName(new TextComponentTranslation("pixelmonquests.generation"));
-        config.addString("form", () -> this.form, v -> this.form = v, "All").setDisplayName(new TextComponentTranslation("pixelmonquests.form"));
+        config.addString("form", () -> this.form, v -> this.form = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.form"));
         config.addString("customTexture", () -> this.customTexture, v -> this.customTexture = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.customTexture"));
         config.addBool("shiny", () -> this.shiny, v -> this.shiny = v, false).setDisplayName(new TextComponentTranslation("pixelmonquests.shiny"));
         config.addBool("beast", () -> this.beast, v -> this.beast = v, false).setDisplayName(new TextComponentTranslation("pixelmonquests.beast"));
@@ -218,7 +218,7 @@ public class PokemonDefeatTask extends Task {
                 return;
             }
 
-            if (task.generation == pokemonSpec.getGeneration() && pokemonSpec.getGeneration() != 0) {
+            if (task.generation != 0 && task.generation != pokemonSpec.getGeneration()) {
                 return;
             }
 
@@ -230,15 +230,15 @@ public class PokemonDefeatTask extends Task {
                 return;
             }
 
-            if (task.shiny != pokemon.isShiny()) {
+            if (task.shiny && !pokemon.isShiny()) {
                 return;
             }
 
-            if (task.beast != pokemonSpec.isUltraBeast()) {
+            if (task.beast && !pokemonSpec.isUltraBeast()) {
                 return;
             }
 
-            if (task.legendary != pokemonSpec.isLegendary()) {
+            if (task.legendary && !pokemonSpec.isLegendary()) {
                 return;
             }
 

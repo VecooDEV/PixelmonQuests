@@ -202,7 +202,7 @@ public class PokemonCatchTask extends Task {
         config.addInt("ivs", () -> this.ivs, v -> this.ivs = v, 0, 0, Integer.MAX_VALUE).setDisplayName(new TextComponentTranslation("pixelmonquests.ivs"));
         config.addInt("generation", () -> this.generation, v -> this.generation = v, 0, 0, Integer.MAX_VALUE).setDisplayName(new TextComponentTranslation("pixelmonquests.generation"));
         config.addInt("weight", () -> this.weight, v -> this.weight = v, 0, 0, Integer.MAX_VALUE).setDisplayName(new TextComponentTranslation("pixelmonquests.weight"));
-        config.addString("form", () -> this.form, v -> this.form = v, "All").setDisplayName(new TextComponentTranslation("pixelmonquests.form"));
+        config.addString("form", () -> this.form, v -> this.form = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.form"));
         config.addString("customTexture", () -> this.customTexture, v -> this.customTexture = v, "Any").setDisplayName(new TextComponentTranslation("pixelmonquests.customTexture"));
         config.addBool("shiny", () -> this.shiny, v -> this.shiny = v, false).setDisplayName(new TextComponentTranslation("pixelmonquests.shiny"));
         config.addBool("beast", () -> this.beast, v -> this.beast = v, false).setDisplayName(new TextComponentTranslation("pixelmonquests.beast"));
@@ -245,7 +245,7 @@ public class PokemonCatchTask extends Task {
                 return;
             }
 
-            if (task.hiddenAbility != (pokemon.getAbilitySlot() == 2)) {
+            if (task.hiddenAbility && pokemon.getAbilitySlot() != 2) {
                 return;
             }
 
@@ -265,7 +265,7 @@ public class PokemonCatchTask extends Task {
                 return;
             }
 
-            if (task.generation == pokemonSpec.getGeneration() && pokemonSpec.getGeneration() != 0) {
+            if (task.generation != 0 && task.generation != pokemonSpec.getGeneration()) {
                 return;
             }
 
@@ -281,15 +281,15 @@ public class PokemonCatchTask extends Task {
                 return;
             }
 
-            if (task.shiny != pokemon.isShiny()) {
+            if (task.shiny && !pokemon.isShiny()) {
                 return;
             }
 
-            if (task.beast != pokemonSpec.isUltraBeast()) {
+            if (task.beast && !pokemonSpec.isUltraBeast()) {
                 return;
             }
 
-            if (task.legendary != pokemonSpec.isLegendary()) {
+            if (task.legendary && !pokemonSpec.isLegendary()) {
                 return;
             }
 
