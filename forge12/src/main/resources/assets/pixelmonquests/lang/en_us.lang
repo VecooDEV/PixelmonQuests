@@ -2,11 +2,14 @@ ftbquests.task.pixelmonquests.pokemon_catch=Catch a Pokemon
 ftbquests.task.pixelmonquests.pokemon_defeat=Defeat a Pokemon
 ftbquests.task.pixelmonquests.pokemon_egg_hatch=Hatch egg pokemon
 ftbquests.task.pixelmonquests.pokedex=Pokedex
+ftbquests.task.pixelmonquests.pokemon_submit=Pokemon submit
 
 pixelmonquests.pokemon_catch.title=Catch %dx %s
 pixelmonquests.pokemon_defeat.title=Defeat %dx %s
 pixelmonquests.pokemon_egg_hatch.title=Hatch %dx %s
 pixelmonquests.pokedex.title=Fill pokedex %d%%
+pixelmonquests.pokemon_submit.title=Collect pokemon %dx %s
+pixelmonquests.pokemon_submit_consume.title=Consume pokemon %dx %s
 
 pixelmonquests.pokemon=Pokemon
 pixelmonquests.pokemon.tooltip=Pokemon name (in English).
@@ -44,4 +47,6 @@ pixelmonquests.legendary=Legendary
 pixelmonquests.legendary.tooltip=Is this Pokemon Legendary?
 pixelmonquests.amount=Amount
 pixelmonquests.amount.tooltip=Amount of Pokemon.
+pixelmonquests.consume=Consume
+pixelmonquests.consume.tooltip=Consume amount.
 pixelmonquests.pokedex.percent=Pokedex percent
