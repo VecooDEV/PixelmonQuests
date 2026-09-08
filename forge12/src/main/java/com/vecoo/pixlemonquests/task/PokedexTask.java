@@ -103,7 +103,7 @@ public class PokedexTask extends Task {
                 return;
             }
 
-            int total = Pokedex.size();
+            int total = Pokedex.pokedexSize;
 
             if (total <= 0) {
                 return;
