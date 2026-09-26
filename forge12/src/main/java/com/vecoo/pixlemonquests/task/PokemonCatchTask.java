@@ -261,7 +261,7 @@ public class PokemonCatchTask extends Task {
                 return;
             }
 
-            if (task.ivs > pokemon.getIVs().getTotal()) {
+            if (task.ivs > pokemon.getIVs().getPercentage(2)) {
                 return;
             }
 
@@ -289,7 +289,7 @@ public class PokemonCatchTask extends Task {
                 return;
             }
 
-            if (task.legendary && !pokemonSpec.isLegendary()) {
+            if (!task.legendary || pokemonSpec.isLegendary()) {
                 return;
             }
 

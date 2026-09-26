@@ -389,7 +389,7 @@ public class PokemonSubmitTask extends Task {
                 return false;
             }
 
-            if (task.ivs > pokemon.getIVs().getTotal()) {
+            if (task.ivs > pokemon.getIVs().getPercentage(2)) {
                 return false;
             }
 
@@ -417,7 +417,7 @@ public class PokemonSubmitTask extends Task {
                 return false;
             }
 
-            return task.legendary == species.isLegendary();
+            return !task.legendary || species.isLegendary();
         }
 
         private void returnHeldItem(EntityPlayerMP player, Pokemon pokemon) {
