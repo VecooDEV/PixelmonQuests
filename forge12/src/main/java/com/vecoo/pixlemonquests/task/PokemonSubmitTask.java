@@ -389,7 +389,7 @@ public class PokemonSubmitTask extends Task {
                 return false;
             }
 
-            if (task.ivs > pokemon.getIVs().getPercentage(2)) {
+            if (task.ivs > pokemon.getIVs().getTotal()) {
                 return false;
             }
 
