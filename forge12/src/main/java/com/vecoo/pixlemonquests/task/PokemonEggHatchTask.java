@@ -169,7 +169,7 @@ public class PokemonEggHatchTask extends Task {
                 return;
             }
 
-            if (!task.legendary || pokemonSpec.isLegendary()) {
+            if (task.legendary && !pokemonSpec.isLegendary()) {
                 return;
             }
 
